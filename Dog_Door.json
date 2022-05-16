@@ -1,0 +1,1234 @@
+[
+    {
+        "id": "c3231b84b218fb01",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "74dd27a86477de16",
+        "type": "influxdb out",
+        "z": "c3231b84b218fb01",
+        "influxdb": "05e610ca2ce86709",
+        "name": "",
+        "measurement": "services",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "GREENHOUSE",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "one_week",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 1060,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "ec25a26e6e5e452d",
+        "type": "rpi-gpio out",
+        "z": "c3231b84b218fb01",
+        "name": "UP",
+        "pin": "18",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 1570,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "7ff998238c32aff5",
+        "type": "switch",
+        "z": "c3231b84b218fb01",
+        "name": "RSSI >= -45",
+        "property": "payload.rssi",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "-45",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 130,
+        "y": 300,
+        "wires": [
+            [
+                "44d15a5140be7996"
+            ]
+        ]
+    },
+    {
+        "id": "44d15a5140be7996",
+        "type": "switch",
+        "z": "c3231b84b218fb01",
+        "name": "UUID Filter",
+        "property": "payload.address",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "e8:42:53:b2:9f:b9",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "c2:96:d4:4f:9f:84",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "f0:de:98:36:38:7e",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "dd:86:80:6f:ac:3b",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 130,
+        "y": 420,
+        "wires": [
+            [
+                "30e737563964f161"
+            ],
+            [
+                "5efcd68a371e69f2"
+            ],
+            [
+                "789f1610684d6865"
+            ],
+            [
+                "f8482136ae823818"
+            ]
+        ]
+    },
+    {
+        "id": "30e737563964f161",
+        "type": "change",
+        "z": "c3231b84b218fb01",
+        "name": "Boo Trigger",
+        "rules": [
+            {
+                "t": "set",
+                "p": "trigger_source",
+                "pt": "msg",
+                "to": "Boo",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "distance",
+                "pt": "msg",
+                "to": "payload.rssi",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 320,
+        "wires": [
+            [
+                "03c2f9ecbb442ac0",
+                "75cca95cfadeb28b"
+            ]
+        ]
+    },
+    {
+        "id": "5efcd68a371e69f2",
+        "type": "change",
+        "z": "c3231b84b218fb01",
+        "name": "Roxy Trigger",
+        "rules": [
+            {
+                "t": "set",
+                "p": "trigger_source",
+                "pt": "msg",
+                "to": "Roxy",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "distance",
+                "pt": "msg",
+                "to": "payload.rssi",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 380,
+        "wires": [
+            [
+                "03c2f9ecbb442ac0",
+                "75cca95cfadeb28b"
+            ]
+        ]
+    },
+    {
+        "id": "789f1610684d6865",
+        "type": "change",
+        "z": "c3231b84b218fb01",
+        "name": "KIA Trigger",
+        "rules": [
+            {
+                "t": "set",
+                "p": "trigger_source",
+                "pt": "msg",
+                "to": "Keys1",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "distance",
+                "pt": "msg",
+                "to": "payload.rssi",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 440,
+        "wires": [
+            [
+                "03c2f9ecbb442ac0",
+                "75cca95cfadeb28b"
+            ]
+        ]
+    },
+    {
+        "id": "f8482136ae823818",
+        "type": "change",
+        "z": "c3231b84b218fb01",
+        "name": "Subaru Trigger",
+        "rules": [
+            {
+                "t": "set",
+                "p": "trigger_source",
+                "pt": "msg",
+                "to": "Key2",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "distance",
+                "pt": "msg",
+                "to": "payload.rssi",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 500,
+        "wires": [
+            [
+                "03c2f9ecbb442ac0",
+                "75cca95cfadeb28b"
+            ]
+        ]
+    },
+    {
+        "id": "fb966e14360d2b31",
+        "type": "trigger",
+        "z": "c3231b84b218fb01",
+        "name": "Open Door Pulse",
+        "op1": "true",
+        "op2": "false",
+        "op1type": "bool",
+        "op2type": "bool",
+        "duration": "5",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 990,
+        "y": 520,
+        "wires": [
+            [
+                "c638b3dccacc6ffe"
+            ]
+        ]
+    },
+    {
+        "id": "03c2f9ecbb442ac0",
+        "type": "change",
+        "z": "c3231b84b218fb01",
+        "name": "BLE Triggered",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Door_T",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 760,
+        "y": 380,
+        "wires": [
+            [
+                "fb966e14360d2b31"
+            ]
+        ]
+    },
+    {
+        "id": "3a20f003d55f7848",
+        "type": "rpi-gpio out",
+        "z": "c3231b84b218fb01",
+        "name": "DOWN",
+        "pin": "25",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 1580,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "ce66b66ef7fc21c5",
+        "type": "inject",
+        "z": "c3231b84b218fb01",
+        "name": "Initialize",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 140,
+        "y": 640,
+        "wires": [
+            [
+                "8516a8f51ffc2af9"
+            ]
+        ]
+    },
+    {
+        "id": "8516a8f51ffc2af9",
+        "type": "change",
+        "z": "c3231b84b218fb01",
+        "name": "Init Trigger",
+        "rules": [
+            {
+                "t": "set",
+                "p": "trigger_source",
+                "pt": "msg",
+                "to": "Init",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 640,
+        "wires": [
+            [
+                "75cca95cfadeb28b",
+                "03c2f9ecbb442ac0"
+            ]
+        ]
+    },
+    {
+        "id": "ee1d0a373644534d",
+        "type": "inject",
+        "z": "c3231b84b218fb01",
+        "name": "Manually Open",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 160,
+        "y": 720,
+        "wires": [
+            [
+                "24e1e25fb58de900"
+            ]
+        ]
+    },
+    {
+        "id": "3fb24a21eee2f977",
+        "type": "inject",
+        "z": "c3231b84b218fb01",
+        "name": "Manually Close",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 160,
+        "y": 800,
+        "wires": [
+            [
+                "7a4f3f724055198b"
+            ]
+        ]
+    },
+    {
+        "id": "24e1e25fb58de900",
+        "type": "change",
+        "z": "c3231b84b218fb01",
+        "name": "Manual Open Trigger",
+        "rules": [
+            {
+                "t": "set",
+                "p": "trigger_source",
+                "pt": "msg",
+                "to": "Manual_Open",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 720,
+        "wires": [
+            [
+                "75cca95cfadeb28b",
+                "03c2f9ecbb442ac0"
+            ]
+        ]
+    },
+    {
+        "id": "7a4f3f724055198b",
+        "type": "change",
+        "z": "c3231b84b218fb01",
+        "name": "Manual Close Trigger",
+        "rules": [
+            {
+                "t": "set",
+                "p": "trigger_source",
+                "pt": "msg",
+                "to": "Close_Trigger",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "C_Trig",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 800,
+        "wires": [
+            [
+                "75cca95cfadeb28b",
+                "9499750b8aba0d9d"
+            ]
+        ]
+    },
+    {
+        "id": "75cca95cfadeb28b",
+        "type": "function",
+        "z": "c3231b84b218fb01",
+        "name": "",
+        "func": "var trigger = msg.trigger_source\nvar distance = msg.distance\n{\n    msg.payload =\n    {\n        Tag: trigger,\n        Distance: distance \n    }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 200,
+        "wires": [
+            [
+                "74dd27a86477de16"
+            ]
+        ]
+    },
+    {
+        "id": "25ad69c28b50ec74",
+        "type": "BLE Scan",
+        "z": "c3231b84b218fb01",
+        "name": "",
+        "x": 120,
+        "y": 200,
+        "wires": [
+            [
+                "7ff998238c32aff5",
+                "fcbfbf7fd0be8f8e"
+            ]
+        ]
+    },
+    {
+        "id": "c7928378dcb7e9e3",
+        "type": "InvertUltimate",
+        "z": "c3231b84b218fb01",
+        "name": "Invert",
+        "x": 1070,
+        "y": 620,
+        "wires": [
+            [
+                "c638b3dccacc6ffe",
+                "ddd8a9be1bd50042"
+            ]
+        ]
+    },
+    {
+        "id": "c638b3dccacc6ffe",
+        "type": "BooleanLogicUltimate",
+        "z": "c3231b84b218fb01",
+        "name": "",
+        "filtertrue": "both",
+        "persist": true,
+        "sInitializeWith": "WaitForPayload",
+        "triggertopic": "trigger",
+        "outputtriggeredby": "all",
+        "inputCount": "3",
+        "topic": "result",
+        "restrictinputevaluation": false,
+        "delayEvaluation": 0,
+        "x": 1310,
+        "y": 580,
+        "wires": [
+            [
+                "ec25a26e6e5e452d",
+                "80982fbe608757c0"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "edc432f6397563e4",
+        "type": "rpi-gpio in",
+        "z": "c3231b84b218fb01",
+        "name": "Open Limit",
+        "pin": "20",
+        "intype": "up",
+        "debounce": "25",
+        "read": true,
+        "bcm": true,
+        "x": 700,
+        "y": 500,
+        "wires": [
+            [
+                "db740457df20c932",
+                "215766af495c0498"
+            ]
+        ]
+    },
+    {
+        "id": "7eced51c909db661",
+        "type": "BooleanLogicUltimate",
+        "z": "c3231b84b218fb01",
+        "name": "",
+        "filtertrue": "both",
+        "persist": true,
+        "sInitializeWith": "WaitForPayload",
+        "triggertopic": "trigger",
+        "outputtriggeredby": "all",
+        "inputCount": 2,
+        "topic": "result",
+        "restrictinputevaluation": true,
+        "delayEvaluation": 0,
+        "x": 1310,
+        "y": 880,
+        "wires": [
+            [
+                "3a20f003d55f7848",
+                "ba1f392d8694da13",
+                "cbedbf6ca92aead2"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "c0935e337ee762ad",
+        "type": "inject",
+        "z": "c3231b84b218fb01",
+        "name": "Initialize",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1.0",
+        "topic": "Open",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 900,
+        "y": 620,
+        "wires": [
+            [
+                "c7928378dcb7e9e3"
+            ]
+        ]
+    },
+    {
+        "id": "78b7a0f6eb58c594",
+        "type": "inject",
+        "z": "c3231b84b218fb01",
+        "name": "Initialize",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "Door_T",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 780,
+        "y": 340,
+        "wires": [
+            [
+                "c638b3dccacc6ffe"
+            ]
+        ]
+    },
+    {
+        "id": "ebd02499320dc2a2",
+        "type": "InvertUltimate",
+        "z": "c3231b84b218fb01",
+        "name": "Invert",
+        "x": 1070,
+        "y": 920,
+        "wires": [
+            [
+                "7eced51c909db661",
+                "ddd8a9be1bd50042"
+            ]
+        ]
+    },
+    {
+        "id": "8e4f09dfbf6c6592",
+        "type": "rpi-gpio in",
+        "z": "c3231b84b218fb01",
+        "name": "Closed Limit",
+        "pin": "21",
+        "intype": "up",
+        "debounce": "25",
+        "read": true,
+        "bcm": true,
+        "x": 690,
+        "y": 940,
+        "wires": [
+            [
+                "53acbe5803b49062"
+            ]
+        ]
+    },
+    {
+        "id": "5715df46db55193e",
+        "type": "inject",
+        "z": "c3231b84b218fb01",
+        "name": "Initialize",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "C_Trig",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 440,
+        "y": 840,
+        "wires": [
+            [
+                "7eced51c909db661"
+            ]
+        ]
+    },
+    {
+        "id": "198f9b63691a9405",
+        "type": "inject",
+        "z": "c3231b84b218fb01",
+        "name": "Initialize",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1.0",
+        "topic": "Closed",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 900,
+        "y": 980,
+        "wires": [
+            [
+                "ebd02499320dc2a2"
+            ]
+        ]
+    },
+    {
+        "id": "db740457df20c932",
+        "type": "change",
+        "z": "c3231b84b218fb01",
+        "name": "Init Trigger",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Open",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 890,
+        "y": 580,
+        "wires": [
+            [
+                "c7928378dcb7e9e3"
+            ]
+        ]
+    },
+    {
+        "id": "ba1f392d8694da13",
+        "type": "InvertUltimate",
+        "z": "c3231b84b218fb01",
+        "name": "Invert",
+        "x": 1310,
+        "y": 740,
+        "wires": [
+            [
+                "c638b3dccacc6ffe"
+            ]
+        ]
+    },
+    {
+        "id": "9499750b8aba0d9d",
+        "type": "trigger",
+        "z": "c3231b84b218fb01",
+        "name": "Close Door Pulse",
+        "op1": "true",
+        "op2": "false",
+        "op1type": "bool",
+        "op2type": "bool",
+        "duration": "5",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 990,
+        "y": 800,
+        "wires": [
+            [
+                "7eced51c909db661"
+            ]
+        ]
+    },
+    {
+        "id": "ddd8a9be1bd50042",
+        "type": "BooleanLogicUltimate",
+        "z": "c3231b84b218fb01",
+        "name": "",
+        "filtertrue": "both",
+        "persist": true,
+        "sInitializeWith": "WaitForPayload",
+        "triggertopic": "trigger",
+        "outputtriggeredby": "all",
+        "inputCount": 2,
+        "topic": "result",
+        "restrictinputevaluation": true,
+        "delayEvaluation": 0,
+        "x": 1310,
+        "y": 980,
+        "wires": [
+            [
+                "f53a63f185f4ac54"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "80982fbe608757c0",
+        "type": "rpi-gpio out",
+        "z": "c3231b84b218fb01",
+        "name": "UP",
+        "pin": "23",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 1570,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "cbedbf6ca92aead2",
+        "type": "rpi-gpio out",
+        "z": "c3231b84b218fb01",
+        "name": "DOWN",
+        "pin": "24",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 1580,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "53acbe5803b49062",
+        "type": "change",
+        "z": "c3231b84b218fb01",
+        "name": "Init Trigger",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Closed",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 890,
+        "y": 940,
+        "wires": [
+            [
+                "ebd02499320dc2a2"
+            ]
+        ]
+    },
+    {
+        "id": "215766af495c0498",
+        "type": "delay",
+        "z": "c3231b84b218fb01",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 720,
+        "y": 680,
+        "wires": [
+            [
+                "7a4f3f724055198b"
+            ]
+        ]
+    },
+    {
+        "id": "cdfae4e88ae86b26",
+        "type": "change",
+        "z": "c3231b84b218fb01",
+        "name": "Boo Tracking",
+        "rules": [
+            {
+                "t": "set",
+                "p": "track_boo",
+                "pt": "msg",
+                "to": "payload.rssi",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 80,
+        "wires": [
+            [
+                "36fdacfceb19a2ab"
+            ]
+        ]
+    },
+    {
+        "id": "ff846e8db0e61aa4",
+        "type": "change",
+        "z": "c3231b84b218fb01",
+        "name": "Roxy Tracking",
+        "rules": [
+            {
+                "t": "set",
+                "p": "track_roxy",
+                "pt": "msg",
+                "to": "payload.rssi",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 140,
+        "wires": [
+            [
+                "36fdacfceb19a2ab"
+            ]
+        ]
+    },
+    {
+        "id": "36fdacfceb19a2ab",
+        "type": "delay",
+        "z": "c3231b84b218fb01",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "10",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 620,
+        "y": 100,
+        "wires": [
+            [
+                "7da6fa8a39b6e4fd"
+            ]
+        ]
+    },
+    {
+        "id": "7da6fa8a39b6e4fd",
+        "type": "function",
+        "z": "c3231b84b218fb01",
+        "name": "",
+        "func": "var track_boo = msg.track_boo\nvar track_roxy = msg.track_roxy\n{\n    msg.payload =\n    {\n        Boo_Distance: track_boo,\n        Roxy_Distance: track_roxy\n        \n    }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 140,
+        "wires": [
+            [
+                "74dd27a86477de16"
+            ]
+        ]
+    },
+    {
+        "id": "fcbfbf7fd0be8f8e",
+        "type": "switch",
+        "z": "c3231b84b218fb01",
+        "name": "UUID Filter",
+        "property": "payload.address",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "e8:42:53:b2:9f:b9",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "c2:96:d4:4f:9f:84",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 230,
+        "y": 100,
+        "wires": [
+            [
+                "cdfae4e88ae86b26"
+            ],
+            [
+                "ff846e8db0e61aa4"
+            ]
+        ]
+    },
+    {
+        "id": "ab56a165d11d19ff",
+        "type": "play audio",
+        "z": "c3231b84b218fb01",
+        "d": true,
+        "name": "",
+        "voice": "0",
+        "x": 1830,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "7e51ffe1882d5fb2",
+        "type": "change",
+        "z": "c3231b84b218fb01",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "The door status is unknown. It is likely human error.",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1640,
+        "y": 1000,
+        "wires": [
+            [
+                "ab56a165d11d19ff"
+            ]
+        ]
+    },
+    {
+        "id": "f53a63f185f4ac54",
+        "type": "delay",
+        "z": "c3231b84b218fb01",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1480,
+        "y": 1000,
+        "wires": [
+            [
+                "7e51ffe1882d5fb2"
+            ]
+        ]
+    },
+    {
+        "id": "a3129531afee7351",
+        "type": "rpi-gpio in",
+        "z": "c3231b84b218fb01",
+        "name": "Button Open",
+        "pin": "19",
+        "intype": "up",
+        "debounce": "25",
+        "read": false,
+        "bcm": true,
+        "x": 130,
+        "y": 920,
+        "wires": [
+            [
+                "24e1e25fb58de900"
+            ]
+        ]
+    },
+    {
+        "id": "9eff9f3577a2ee0f",
+        "type": "rpi-gpio in",
+        "z": "c3231b84b218fb01",
+        "name": "Button Close",
+        "pin": "26",
+        "intype": "up",
+        "debounce": "25",
+        "read": false,
+        "bcm": true,
+        "x": 130,
+        "y": 980,
+        "wires": [
+            [
+                "7a4f3f724055198b"
+            ]
+        ]
+    },
+    {
+        "id": "05e610ca2ce86709",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "GREENHOUSE",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "1.8-flux",
+        "url": "http://localhost:8086",
+        "rejectUnauthorized": false
+    }
+]
